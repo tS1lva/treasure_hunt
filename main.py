@@ -1,3 +1,4 @@
+import pathFinder
 def printMapa(mapa):
     for i in range(len(mapa)):
         for j in range (len(mapa[i])):
@@ -10,15 +11,24 @@ if __name__ == '__main__':
     user = "S"
     treasure = "T"
 
-    linha1 = [wall,wall,wall,wall,wall,wall,wall]
-    linha2 = [wall,user,dot,dot,dot,dot,wall]
-    linha3 = [wall,dot,wall,dot,wall,wall,wall]
-    linha4 = [wall,dot,dot,dot,wall,dot,wall]
-    linha5 = [wall,dot,wall,wall,wall,dot,wall]
-    linha6 = [wall,dot,dot,treasure,dot,dot,wall]
-    linha7 = [wall,wall,wall,wall,wall,wall,wall]
+    user_coord = [1,1]
 
-    mapa = [linha1,linha2,linha3,linha4,linha5,linha6,linha7]
+    mapa = [
+        [wall, wall, wall, wall, wall, wall, wall],
+        [wall, user, dot, dot, dot, dot, wall],
+        [wall, dot, wall, dot, wall, wall, wall],
+        [wall, dot, dot, dot, wall, dot, wall],
+        [wall, dot, wall, wall, wall, dot, wall],
+        [wall, dot, dot, treasure, dot, dot, wall],
+        [wall, wall, wall, wall, wall, wall, wall]
+    ]
+
+    printMapa(mapa)
+    print(pathFinder.find_user(mapa))
+
+    user_coord = pathFinder.walk(mapa, user_coord)
+    print("nova coord user")
+    print(user_coord)
 
     printMapa(mapa)
 

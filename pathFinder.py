@@ -16,8 +16,23 @@ def return_left(mapa, i, j):
 def find_user(mapa):
     #LOGICA PARA ACHAR OS INDICES DO USER (I E J)
     #USAR VARIAVEL GLOBAL PARA ATUALIZAR A POSIÇÃO DO USUARIO
-    print("")
+    for i in range(len(mapa)):
+        for j in range(len(mapa[0])):
+            if mapa[i][j] == "S":
+                start = (i, j)
+                return start
 
-def walk(mapa):
-    #LOGICA PARA ANDAR
-    print("")
+
+    return "user not found"
+
+def walk(mapa, user_coord):
+    # Lógica para andar
+    if return_right(mapa, user_coord[0], user_coord[1]):
+        return (user_coord[0], user_coord[1] + 1)
+    return user_coord  # Retorna a mesma coordenada se não puder andar
+
+# Chamando a função e atualizando a coordenada
+
+
+def returnCoord(mapa, i, j):
+    return mapa[i][j]
