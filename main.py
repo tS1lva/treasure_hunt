@@ -1,17 +1,10 @@
 import pathFinder
-def printMapa(mapa):
-    for i in range(len(mapa)):
-        for j in range (len(mapa[i])):
-            print(mapa[i][j], end="")
-        print("")
 
 if __name__ == '__main__':
     wall ="#"
     dot = "."
     user = "S"
     treasure = "T"
-
-    user_coord = [1,1]
 
     mapa = [
         [wall, wall, wall, wall, wall, wall, wall],
@@ -23,12 +16,9 @@ if __name__ == '__main__':
         [wall, wall, wall, wall, wall, wall, wall]
     ]
 
-    printMapa(mapa)
-    print(pathFinder.find_user(mapa))
+    pathFinder.printMapa(mapa)
+    print("\nPosição do usuário:", pathFinder.find_user(mapa))
 
-    user_coord = pathFinder.walk(mapa, user_coord)
-    print("nova coord user")
-    print(user_coord)
-
-    printMapa(mapa)
-
+    nova_coord = pathFinder.walk(mapa, pathFinder.find_user(mapa))
+    print("\nPosição final do usuário:", nova_coord)
+    pathFinder.printMapa(mapa)
