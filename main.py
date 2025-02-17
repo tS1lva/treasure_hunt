@@ -16,9 +16,7 @@ if __name__ == '__main__':
         [wall, wall, wall, wall, wall, wall, wall]
     ]
 
+    print("\nPosição do usuário:", pathFinder.find_user(mapa), "\n")
     pathFinder.printMapa(mapa)
-    print("\nPosição do usuário:", pathFinder.find_user(mapa))
-
     nova_coord = pathFinder.walk(mapa, pathFinder.find_user(mapa))
-    print("\nPosição final do usuário:", nova_coord)
-    pathFinder.printMapa(mapa)
+    print("\nPosição final do usuário:", nova_coord, "\n")

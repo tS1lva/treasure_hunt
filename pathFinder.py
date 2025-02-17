@@ -1,6 +1,5 @@
 visited = []
 user_coord = [1,1]
-old_coord = user_coord
 
 def printMapa(mapa):
     for i in range(len(mapa)):
@@ -9,16 +8,16 @@ def printMapa(mapa):
         print("")
 
 def return_up(mapa, i, j):
-    return mapa[i-1][j] == "."
+    return mapa[i-1][j] == "." or mapa[i-1][j] == "T"
 
 def return_down(mapa, i, j):
-    return mapa[i+1][j] == "."
+    return mapa[i+1][j] == "." or mapa[i+1][j] == "T"
 
 def return_right(mapa, i, j):
-    return mapa[i][j+1] == "."
+    return mapa[i][j+1] == "." or mapa[i][j+1] == "T"
 
 def return_left(mapa, i, j):
-    return mapa[i][j-1] == "."
+    return mapa[i][j-1] == "." or mapa[i][j-1] == "T"
 
 def find_user(mapa):
     #LOGICA PARA ACHAR OS INDICES DO USER (I E J)
@@ -44,6 +43,8 @@ def walk(mapa, user_coord):
 
     while user_coord != treasure_position: 
 
+        old_coord = user_coord
+        
         if return_down(mapa, user_coord[0], user_coord[1]):
             user_coord = (user_coord[0] + 1, user_coord[1])
 
@@ -56,16 +57,21 @@ def walk(mapa, user_coord):
         elif return_up(mapa, user_coord[0], user_coord[1]):
             user_coord = (user_coord[0] - 1, user_coord[1])
 
-        mapa[old_coord[0]][old_coord[1]] = "."  # Apaga posição antiga
-        mapa[user_coord[0]][user_coord[1]] = "S" 
-
         visited.append(user_coord) # coloca na lista de posições percorridas
+
+        if user_coord != treasure_position:
+            mapa[old_coord[0]][old_coord[1]] = "."
+            mapa[user_coord[0]][user_coord[1]] = "S"
+
+        else:
+            mapa[old_coord[0]][old_coord[1]] = "."  # Último passo antes de parar
+            mapa[user_coord[0]][user_coord[1]] = "S"
+
         steps += 1
 
+        print(f"\nPasso {steps}: Nova posição do usuário {user_coord}\n")
         printMapa(mapa)
-        print("\nNova posição do usuario:", user_coord)
-        print("\n")
-    
+
     return user_coord
 
 # Chamando a função e atualizando a coordenada
